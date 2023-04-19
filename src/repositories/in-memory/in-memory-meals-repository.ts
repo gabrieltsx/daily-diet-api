@@ -5,6 +5,20 @@ import { MealsRepository } from '../meals-repository'
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
 
+  async findManyByUserId(userId: string): Promise<Meal[]> {
+    return this.items.filter((item) => item.id === userId)
+  }
+
+  async findById(userId: string): Promise<Meal | null> {
+    const meal = this.items.find((item) => item.id === userId)
+
+    if (!meal) {
+      return null
+    }
+
+    return meal
+  }
+
   async create(data: Prisma.MealUncheckedCreateInput) {
     const meal = {
       id: randomUUID(),

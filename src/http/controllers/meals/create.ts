@@ -8,13 +8,19 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
     name: z.string(),
     description: z.string(),
-    createdAt: z.coerce.date(),
+    // createdAt: z.coerce.date(),
     isDiet: z.boolean(),
-    userId: z.string(),
   })
 
-  const { description, name, isDiet, createdAt, userId } =
-    createBodySchema.parse(request.body)
+  const { description, name, isDiet } = createBodySchema.parse(request.body)
+
+  const { userId } = request.cookies
+
+  console.log('cookies', userId)
+
+  if (!userId) {
+    throw new Error('Not found')
+  }
 
   try {
     const prismaMealsRepository = new PrismaMealsRepository()
@@ -24,7 +30,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       description,
       name,
       isDiet,
-      createdAt,
+      createdAt: new Date(),
       userId,
     })
   } catch (err) {

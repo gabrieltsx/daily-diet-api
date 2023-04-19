@@ -16,9 +16,14 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     const usersRepository = new PrismaUsersRepository()
     const createUsersService = new CreateUserService(usersRepository)
 
-    await createUsersService.handle({
+    const { user } = await createUsersService.handle({
       email,
       name,
+    })
+
+    reply.cookie('userId', user.id, {
+      path: '/',
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     })
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {

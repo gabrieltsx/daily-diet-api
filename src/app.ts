@@ -1,9 +1,13 @@
 import fastify from 'fastify'
+import cookie from '@fastify/cookie'
+
 import { ZodError } from 'zod'
 import { mealsRoutes } from './http/controllers/meals/routes'
 import { usersRoutes } from './http/controllers/users/routes'
 
 export const app = fastify()
+
+app.register(cookie)
 
 app.register(usersRoutes)
 app.register(mealsRoutes)
