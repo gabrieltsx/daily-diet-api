@@ -9,7 +9,10 @@ export class InMemoryMealsRepository implements MealsRepository {
     return this.items.filter((item) => item.id === userId)
   }
 
-  async findById(userId: string): Promise<Meal | null> {
+  async findByMealIdAndUserId(
+    mealId: string,
+    userId: string,
+  ): Promise<Meal | null> {
     const meal = this.items.find((item) => item.id === userId)
 
     if (!meal) {

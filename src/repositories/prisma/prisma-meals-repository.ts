@@ -7,8 +7,22 @@ export class PrismaMealsRepository implements MealsRepository {
     return prisma.meal.findMany({ where: { user_id: userId } })
   }
 
-  async findById(userId: string): Promise<Meal | null> {
-    throw new Error('Method not implemented.')
+  async findByMealIdAndUserId(
+    mealId: string,
+    userId: string,
+  ): Promise<Meal | null> {
+    const meal = prisma.meal.findFirst({
+      where: {
+        id: mealId,
+        user_id: userId,
+      },
+    })
+
+    if (!meal) {
+      return null
+    }
+
+    return meal
   }
 
   async create(data: Prisma.MealUncheckedCreateInput) {

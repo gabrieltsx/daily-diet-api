@@ -8,7 +8,7 @@ export async function get(request: FastifyRequest, reply: FastifyReply) {
     mealId: z.string(),
   })
 
-  const { mealId } = fetchBodySchema.parse(request.body)
+  const { mealId } = fetchBodySchema.parse(request.params)
 
   const { userId } = request.cookies
 
