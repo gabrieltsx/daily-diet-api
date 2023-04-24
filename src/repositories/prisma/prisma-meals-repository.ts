@@ -3,6 +3,17 @@ import { Meal, Prisma } from '@prisma/client'
 import { MealsRepository } from '../meals-repository'
 
 export class PrismaMealsRepository implements MealsRepository {
+  async save(data: Prisma.MealUncheckedCreateInput) {
+    const meal = prisma.meal.update({
+      where: {
+        id: data.id,
+      },
+      data,
+    })
+
+    return meal
+  }
+
   async delete(mealId: string, userId: string) {
     await prisma.meal.deleteMany({
       where: {
@@ -34,7 +45,7 @@ export class PrismaMealsRepository implements MealsRepository {
     return meal
   }
 
-  async create(data: Prisma.MealUncheckedCreateInput) {
+  async create(data: Meal) {
     const meal = prisma.meal.create({
       data,
     })

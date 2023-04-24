@@ -5,6 +5,18 @@ import { MealsRepository } from '../meals-repository'
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
 
+  async save(data: Meal): Promise<Meal> {
+    const mealIndex = this.items.findIndex(
+      (item) => item.id === data.id && item.user_id === data.user_id,
+    )
+
+    if (mealIndex >= 0) {
+      this.items[mealIndex] = data
+    }
+
+    return data
+  }
+
   async delete(mealId: string, userId: string): Promise<void> {
     const mealIndex = this.items.findIndex(
       (item) => item.id === mealId && item.user_id === userId,

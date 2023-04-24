@@ -5,4 +5,5 @@ export interface MealsRepository {
   findManyByUserId(userId: string): Promise<Meal[]>
   findByMealIdAndUserId(mealId: string, userId: string): Promise<Meal | null>
   delete(mealId: string, userId: string): Promise<void>
+  save(data: Meal): Promise<Meal>
 }
