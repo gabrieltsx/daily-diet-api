@@ -5,7 +5,7 @@ import { DeleteMealService } from './delete-meal-service'
 let mealsRepository: InMemoryMealsRepository
 let sut: DeleteMealService
 
-describe('Create User Service', () => {
+describe('Delete Meal Service', () => {
   beforeEach(() => {
     mealsRepository = new InMemoryMealsRepository()
     sut = new DeleteMealService(mealsRepository)
