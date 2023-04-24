@@ -5,8 +5,6 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 export async function fetch(request: FastifyRequest, reply: FastifyReply) {
   const { userId } = request.cookies
 
-  console.log('cookies', userId)
-
   if (!userId) {
     throw new Error('Not found')
   }

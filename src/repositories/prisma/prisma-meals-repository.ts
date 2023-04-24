@@ -3,6 +3,15 @@ import { Meal, Prisma } from '@prisma/client'
 import { MealsRepository } from '../meals-repository'
 
 export class PrismaMealsRepository implements MealsRepository {
+  async delete(mealId: string, userId: string) {
+    await prisma.meal.deleteMany({
+      where: {
+        id: mealId,
+        user_id: userId,
+      },
+    })
+  }
+
   async findManyByUserId(userId: string): Promise<Meal[]> {
     return prisma.meal.findMany({ where: { user_id: userId } })
   }

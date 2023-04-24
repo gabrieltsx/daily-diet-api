@@ -5,6 +5,14 @@ import { MealsRepository } from '../meals-repository'
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
 
+  async delete(mealId: string, userId: string): Promise<void> {
+    const mealIndex = this.items.findIndex(
+      (item) => item.id === mealId && item.user_id === userId,
+    )
+
+    this.items.splice(mealIndex, 1)
+  }
+
   async findManyByUserId(userId: string): Promise<Meal[]> {
     return this.items.filter((item) => item.user_id === userId)
   }
