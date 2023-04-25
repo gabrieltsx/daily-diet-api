@@ -3,6 +3,27 @@ import { Meal, Prisma } from '@prisma/client'
 import { MealsRepository } from '../meals-repository'
 
 export class PrismaMealsRepository implements MealsRepository {
+  async countByUserId(userId: string) {
+    const countMeals = prisma.meal.count({
+      where: {
+        user_id: userId,
+      },
+    })
+
+    return countMeals
+  }
+
+  async countByUserIdAndDiet(userId: string, diet: boolean) {
+    const countMeals = prisma.meal.count({
+      where: {
+        user_id: userId,
+        is_diet: diet,
+      },
+    })
+
+    return countMeals
+  }
+
   async save(data: Prisma.MealUncheckedCreateInput) {
     const meal = prisma.meal.update({
       where: {

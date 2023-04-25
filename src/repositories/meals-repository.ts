@@ -6,4 +6,6 @@ export interface MealsRepository {
   findByMealIdAndUserId(mealId: string, userId: string): Promise<Meal | null>
   delete(mealId: string, userId: string): Promise<void>
   save(data: Meal): Promise<Meal>
+  countByUserId(userId: string): Promise<number>
+  countByUserIdAndDiet(userId: string, diet: boolean): Promise<number>
 }

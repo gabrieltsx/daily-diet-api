@@ -5,6 +5,22 @@ import { MealsRepository } from '../meals-repository'
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
 
+  async countByUserId(userId: string) {
+    const countMeals = this.items.filter(
+      (item) => item.user_id === userId,
+    ).length
+
+    return countMeals
+  }
+
+  async countByUserIdAndDiet(userId: string, diet: boolean) {
+    const countMeals = this.items.filter(
+      (item) => item.user_id === userId && item.is_diet === diet,
+    ).length
+
+    return countMeals
+  }
+
   async save(data: Meal): Promise<Meal> {
     const mealIndex = this.items.findIndex(
       (item) => item.id === data.id && item.user_id === data.user_id,
