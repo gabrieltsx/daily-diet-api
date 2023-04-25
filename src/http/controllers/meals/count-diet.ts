@@ -3,7 +3,7 @@ import { GetMealService } from '@/services/get-meal-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function count(request: FastifyRequest, reply: FastifyReply) {
+export async function coutDiet(request: FastifyRequest, reply: FastifyReply) {
   const fetchBodySchema = z.object({
     mealId: z.string(),
   })

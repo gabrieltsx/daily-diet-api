@@ -1,5 +1,6 @@
 import { FastifyInstance } from 'fastify'
-import { cout } from './count'
+import { count } from './count'
+import { coutDiet } from './count-diet'
 import { create } from './create'
 import { del } from './delete'
 import { fetch } from './fetch'
@@ -12,5 +13,6 @@ export async function mealsRoutes(app: FastifyInstance) {
   app.get('/meal', fetch)
   app.delete('/meal/:mealId', del)
   app.put('/meal/:mealId', update)
-  app.get('/meal/:mealId/count', cout)
+  app.get('/meal/:mealId/count', count)
+  app.get('/meal/:mealId/count?diet', coutDiet)
 }
