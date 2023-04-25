@@ -1,14 +1,14 @@
 import { PrismaMealsRepository } from '@/repositories/prisma/prisma-meals-repository'
-import { GetMealService } from '@/services/get-meal-service'
+import { CountMealsDietService } from '@/services/count-meal-diet-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
-export async function coutDiet(request: FastifyRequest, reply: FastifyReply) {
-  const fetchBodySchema = z.object({
-    mealId: z.string(),
+export async function countDiet(request: FastifyRequest, reply: FastifyReply) {
+  const countQuerySchema = z.object({
+    isDiet: z.string(),
   })
 
-  const { mealId } = fetchBodySchema.parse(request.params)
+  const { isDiet } = countQuerySchema.parse(request.query)
 
   const { userId } = request.cookies
 
@@ -17,12 +17,12 @@ export async function coutDiet(request: FastifyRequest, reply: FastifyReply) {
   }
 
   const prismaMealsRepository = new PrismaMealsRepository()
-  const getMealService = new GetMealService(prismaMealsRepository)
+  const countMealsDietService = new CountMealsDietService(prismaMealsRepository)
 
-  const { meal } = await getMealService.handle({
+  const { coutMeals } = await countMealsDietService.handle({
     userId,
-    mealId,
+    isDiet: Boolean(isDiet),
   })
 
-  return reply.status(200).send(meal)
+  return reply.status(200).send(coutMeals)
 }
