@@ -1,6 +1,7 @@
 import { FastifyInstance } from 'fastify'
 import { count } from './count'
 import { countDiet } from './count-diet'
+import { countDietGroupCreatedAt } from './cout-diet-group-created-at'
 import { create } from './create'
 import { del } from './delete'
 import { fetch } from './fetch'
@@ -15,4 +16,5 @@ export async function mealsRoutes(app: FastifyInstance) {
   app.put('/meal/:mealId', update)
   app.get('/meal/count', count)
   app.get('/meal/count-diet', countDiet)
+  app.get('/meal/count-diet/group', countDietGroupCreatedAt)
 }

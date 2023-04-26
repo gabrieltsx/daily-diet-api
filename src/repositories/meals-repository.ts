@@ -1,4 +1,5 @@
 import { Meal, Prisma } from '@prisma/client'
+import { CoutDietGroupDateResponse } from './prisma/prisma-meals-repository'
 
 export interface MealsRepository {
   create(data: Prisma.MealUncheckedCreateInput): Promise<Meal>
@@ -8,4 +9,7 @@ export interface MealsRepository {
   save(data: Meal): Promise<Meal>
   countByUserId(userId: string): Promise<number>
   countByUserIdAndDiet(userId: string, diet: boolean): Promise<number>
+  countIsDietGroupByCreatedAt(
+    userId: string,
+  ): Promise<CoutDietGroupDateResponse[]>
 }

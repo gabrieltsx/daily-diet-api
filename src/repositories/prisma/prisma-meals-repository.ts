@@ -2,7 +2,25 @@ import { prisma } from '@/lib/prisma'
 import { Meal, Prisma } from '@prisma/client'
 import { MealsRepository } from '../meals-repository'
 
+export interface CoutDietGroupDateResponse {
+  day: Date
+  count_diet: BigInt
+}
+
 export class PrismaMealsRepository implements MealsRepository {
+  async countIsDietGroupByCreatedAt(userId: string) {
+    const mealsGroup = await prisma.$queryRaw<CoutDietGroupDateResponse[]>`
+      SELECT DATE(created_at) AS day, COUNT (*) AS count_diet
+        FROM meals
+       WHERE user_id = ${userId}
+         AND is_diet = true
+    GROUP BY DATE(created_at)
+    ORDER BY count_diet DESC
+    `
+
+    return mealsGroup
+  }
+
   async countByUserId(userId: string) {
     const countMeals = prisma.meal.count({
       where: {
