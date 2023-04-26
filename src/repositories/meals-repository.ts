@@ -9,7 +9,7 @@ export interface MealsRepository {
   save(data: Meal): Promise<Meal>
   countByUserId(userId: string): Promise<number>
   countByUserIdAndDiet(userId: string, diet: boolean): Promise<number>
-  countIsDietGroupByCreatedAt(
+  countIsDietByUserIdAndGroupByCreatedAt(
     userId: string,
   ): Promise<CoutDietGroupDateResponse[]>
 }

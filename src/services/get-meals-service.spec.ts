@@ -1,15 +1,15 @@
 import { InMemoryMealsRepository } from '@/repositories/in-memory/in-memory-meals-repository'
 import { describe, beforeEach, it, expect } from 'vitest'
 import { ResourceNotFoundError } from './errors/resource-not-found'
-import { GetMealService } from './get-meal-service'
+import { GetMealsService } from './get-meals-service'
 
 let mealsRepository: InMemoryMealsRepository
-let sut: GetMealService
+let sut: GetMealsService
 
 describe('Get Meal Service', () => {
   beforeEach(() => {
     mealsRepository = new InMemoryMealsRepository()
-    sut = new GetMealService(mealsRepository)
+    sut = new GetMealsService(mealsRepository)
   })
 
   it('should be able to get a meal', async () => {

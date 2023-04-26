@@ -6,23 +6,23 @@ interface CountMealsDietServiceRequest {
 }
 
 interface CountMealsDietServiceResponse {
-  coutMeals: number
+  countMeals: number
 }
 
-export class CountMealsDietService {
+export class CountMealsDietsService {
   constructor(private mealsRepository: MealsRepository) {}
 
   async handle({
     userId,
     isDiet,
   }: CountMealsDietServiceRequest): Promise<CountMealsDietServiceResponse> {
-    const coutMeals = await this.mealsRepository.countByUserIdAndDiet(
+    const countMeals = await this.mealsRepository.countByUserIdAndDiet(
       userId,
       isDiet,
     )
 
     return {
-      coutMeals,
+      countMeals,
     }
   }
 }

@@ -1,5 +1,5 @@
 import { PrismaMealsRepository } from '@/repositories/prisma/prisma-meals-repository'
-import { CountMealsDietService } from '@/services/count-meal-diet-service'
+import { CountMealsDietsService } from '@/services/count-meals-diets-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -17,12 +17,14 @@ export async function countDiet(request: FastifyRequest, reply: FastifyReply) {
   }
 
   const prismaMealsRepository = new PrismaMealsRepository()
-  const countMealsDietService = new CountMealsDietService(prismaMealsRepository)
+  const countMealsDietService = new CountMealsDietsService(
+    prismaMealsRepository,
+  )
 
-  const { coutMeals } = await countMealsDietService.handle({
+  const { countMeals } = await countMealsDietService.handle({
     userId,
     isDiet: Boolean(isDiet),
   })
 
-  return reply.status(200).send(coutMeals)
+  return reply.status(200).send(countMeals)
 }

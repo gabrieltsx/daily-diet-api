@@ -1,9 +1,16 @@
 import { Meal, Prisma } from '@prisma/client'
 import { randomUUID } from 'node:crypto'
 import { MealsRepository } from '../meals-repository'
+import { CoutDietGroupDateResponse } from '../prisma/prisma-meals-repository'
 
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
+
+  async countIsDietByUserIdAndGroupByCreatedAt(
+    userId: string,
+  ): Promise<CoutDietGroupDateResponse[]> {
+    throw new Error('Method not implemented.')
+  }
 
   async countByUserId(userId: string) {
     const countMeals = this.items.filter(

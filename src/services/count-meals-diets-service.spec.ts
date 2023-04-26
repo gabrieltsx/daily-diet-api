@@ -1,14 +1,14 @@
 import { InMemoryMealsRepository } from '@/repositories/in-memory/in-memory-meals-repository'
 import { describe, beforeEach, it, expect } from 'vitest'
-import { CountMealsDietService } from './count-meal-diet-service'
+import { CountMealsDietsService } from './count-meals-diets-service'
 
 let mealsRepository: InMemoryMealsRepository
-let sut: CountMealsDietService
+let sut: CountMealsDietsService
 
 describe('Count Meals Diet Service', () => {
   beforeEach(() => {
     mealsRepository = new InMemoryMealsRepository()
-    sut = new CountMealsDietService(mealsRepository)
+    sut = new CountMealsDietsService(mealsRepository)
   })
 
   it('should be able to count meals by diet true', async () => {
@@ -36,12 +36,12 @@ describe('Count Meals Diet Service', () => {
       created_at: new Date(),
     })
 
-    const { coutMeals } = await sut.handle({
+    const { countMeals } = await sut.handle({
       userId: 'user-1',
       isDiet: true,
     })
 
-    expect(coutMeals).toEqual(2)
+    expect(countMeals).toEqual(2)
   })
 
   it('should be able to count meals by diet false', async () => {
@@ -69,11 +69,11 @@ describe('Count Meals Diet Service', () => {
       created_at: new Date(),
     })
 
-    const { coutMeals } = await sut.handle({
+    const { countMeals } = await sut.handle({
       userId: 'user-1',
       isDiet: false,
     })
 
-    expect(coutMeals).toEqual(2)
+    expect(countMeals).toEqual(2)
   })
 })

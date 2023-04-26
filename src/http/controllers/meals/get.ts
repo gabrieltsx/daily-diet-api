@@ -1,5 +1,5 @@
 import { PrismaMealsRepository } from '@/repositories/prisma/prisma-meals-repository'
-import { GetMealService } from '@/services/get-meal-service'
+import { GetMealsService } from '@/services/get-meals-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -17,7 +17,7 @@ export async function get(request: FastifyRequest, reply: FastifyReply) {
   }
 
   const prismaMealsRepository = new PrismaMealsRepository()
-  const getMealService = new GetMealService(prismaMealsRepository)
+  const getMealService = new GetMealsService(prismaMealsRepository)
 
   const { meal } = await getMealService.handle({
     userId,

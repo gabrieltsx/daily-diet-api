@@ -11,7 +11,7 @@ interface GetMealServiceResponse {
   meal: Meal
 }
 
-export class GetMealService {
+export class GetMealsService {
   constructor(private mealsRepository: MealsRepository) {}
 
   async handle({

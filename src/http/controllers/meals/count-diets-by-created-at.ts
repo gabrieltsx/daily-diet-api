@@ -1,8 +1,8 @@
 import { PrismaMealsRepository } from '@/repositories/prisma/prisma-meals-repository'
-import { CoutMealsDietGroupCreatedAtService } from '@/services/count-diet-group-created-at-service'
+import { CountDietsByCreatedAtService } from '@/services/count-diets-by-created-at-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 
-export async function countDietGroupCreatedAt(
+export async function countDietsByCreatedAt(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
@@ -13,8 +13,9 @@ export async function countDietGroupCreatedAt(
   }
 
   const prismaMealsRepository = new PrismaMealsRepository()
-  const coutMealsDietGroupCreatedAtService =
-    new CoutMealsDietGroupCreatedAtService(prismaMealsRepository)
+  const coutMealsDietGroupCreatedAtService = new CountDietsByCreatedAtService(
+    prismaMealsRepository,
+  )
 
   const { countDietsResponse } =
     await coutMealsDietGroupCreatedAtService.handle({

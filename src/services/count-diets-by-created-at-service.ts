@@ -11,14 +11,14 @@ interface CountMealsDietServiceResponse {
   }[]
 }
 
-export class CoutMealsDietGroupCreatedAtService {
+export class CountDietsByCreatedAtService {
   constructor(private mealsRepository: MealsRepository) {}
 
   async handle({
     userId,
   }: CountMealsDietServiceRequest): Promise<CountMealsDietServiceResponse> {
     const countDietsReturn =
-      await this.mealsRepository.countIsDietGroupByCreatedAt(userId)
+      await this.mealsRepository.countIsDietByUserIdAndGroupByCreatedAt(userId)
 
     const countDietsResponse = countDietsReturn.map((diets) => {
       return {

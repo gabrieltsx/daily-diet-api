@@ -5,7 +5,7 @@ interface CountMealsServiceRequest {
 }
 
 interface CountMealsServiceResponse {
-  coutMeals: number
+  countMeals: number
 }
 
 export class CountMealsService {
@@ -14,10 +14,10 @@ export class CountMealsService {
   async handle({
     userId,
   }: CountMealsServiceRequest): Promise<CountMealsServiceResponse> {
-    const coutMeals = await this.mealsRepository.countByUserId(userId)
+    const countMeals = await this.mealsRepository.countByUserId(userId)
 
     return {
-      coutMeals,
+      countMeals,
     }
   }
 }

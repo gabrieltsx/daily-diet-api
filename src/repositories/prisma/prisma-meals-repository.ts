@@ -8,7 +8,7 @@ export interface CoutDietGroupDateResponse {
 }
 
 export class PrismaMealsRepository implements MealsRepository {
-  async countIsDietGroupByCreatedAt(userId: string) {
+  async countIsDietByUserIdAndGroupByCreatedAt(userId: string) {
     const mealsGroup = await prisma.$queryRaw<CoutDietGroupDateResponse[]>`
       SELECT DATE(created_at) AS day, COUNT (*) AS count_diet
         FROM meals
