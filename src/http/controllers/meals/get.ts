@@ -12,15 +12,11 @@ export async function get(request: FastifyRequest, reply: FastifyReply) {
 
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const prismaMealsRepository = new PrismaMealsRepository()
   const getMealService = new GetMealsService(prismaMealsRepository)
 
   const { meal } = await getMealService.handle({
-    userId,
+    userId: userId ?? '',
     mealId,
   })
 

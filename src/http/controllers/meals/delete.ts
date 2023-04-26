@@ -12,15 +12,11 @@ export async function del(request: FastifyRequest, reply: FastifyReply) {
 
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const prismaMealsRepository = new PrismaMealsRepository()
   const deleteMealService = new DeleteMealService(prismaMealsRepository)
 
   await deleteMealService.handle({
-    userId,
+    userId: userId ?? '',
     mealId,
   })
 

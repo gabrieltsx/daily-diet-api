@@ -7,10 +7,6 @@ import { z } from 'zod'
 export async function update(request: FastifyRequest, reply: FastifyReply) {
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const updateParamSchema = z.object({
     mealId: z.string(),
   })
@@ -29,7 +25,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
 
     await createMealService.handle({
       mealId,
-      userId,
+      userId: userId ?? '',
       newMeal,
     })
   } catch (err) {

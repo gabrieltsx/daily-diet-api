@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-// import { verifyCookie } from '../middlewares/verify-cookie'
+import { verifyCookie } from '../middlewares/verify-cookie'
 import { count } from './count'
 import { countDiet } from './count-diets'
 import { countDietsByCreatedAt } from './count-diets-by-created-at'
@@ -10,7 +10,7 @@ import { get } from './get'
 import { update } from './update'
 
 export async function mealsRoutes(app: FastifyInstance) {
-  // app.addHook('onRequest', verifyCookie)
+  app.addHook('onRequest', verifyCookie)
 
   app.post('/meal', create)
   app.get('/meal/:mealId', get)

@@ -16,12 +16,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
 
   const { userId } = request.cookies
 
-  console.log('cookies', userId)
-
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   try {
     const prismaMealsRepository = new PrismaMealsRepository()
     const createMealService = new CreateMealService(prismaMealsRepository)
@@ -31,7 +25,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       name,
       isDiet,
       createdAt: new Date(),
-      userId,
+      userId: userId ?? '',
     })
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {

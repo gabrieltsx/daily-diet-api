@@ -5,15 +5,11 @@ import { FastifyReply, FastifyRequest } from 'fastify'
 export async function count(request: FastifyRequest, reply: FastifyReply) {
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const prismaMealsRepository = new PrismaMealsRepository()
-  const getMealService = new CountMealsService(prismaMealsRepository)
+  const countMealService = new CountMealsService(prismaMealsRepository)
 
-  const { countMeals } = await getMealService.handle({
-    userId,
+  const { countMeals } = await countMealService.handle({
+    userId: userId ?? '',
   })
 
   return reply.status(200).send(countMeals)

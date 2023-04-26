@@ -8,10 +8,6 @@ export async function countDietsByCreatedAt(
 ) {
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const prismaMealsRepository = new PrismaMealsRepository()
   const coutMealsDietGroupCreatedAtService = new CountDietsByCreatedAtService(
     prismaMealsRepository,
@@ -19,7 +15,7 @@ export async function countDietsByCreatedAt(
 
   const { countDietsResponse } =
     await coutMealsDietGroupCreatedAtService.handle({
-      userId,
+      userId: userId ?? '',
     })
 
   return reply.status(200).send(countDietsResponse)

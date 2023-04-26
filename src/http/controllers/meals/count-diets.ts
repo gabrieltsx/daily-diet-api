@@ -12,17 +12,14 @@ export async function countDiet(request: FastifyRequest, reply: FastifyReply) {
 
   const { userId } = request.cookies
 
-  if (!userId) {
-    throw new Error('Not found')
-  }
-
   const prismaMealsRepository = new PrismaMealsRepository()
   const countMealsDietService = new CountMealsDietsService(
     prismaMealsRepository,
   )
 
+  console.log('dieta', isDiet)
   const { countMeals } = await countMealsDietService.handle({
-    userId,
+    userId: userId ?? '',
     isDiet: Boolean(isDiet),
   })
 
