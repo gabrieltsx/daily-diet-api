@@ -5,7 +5,7 @@ export interface MealsRepository {
   create(data: Prisma.MealUncheckedCreateInput): Promise<Meal>
   findManyByUserId(userId: string): Promise<Meal[]>
   findByMealIdAndUserId(mealId: string, userId: string): Promise<Meal | null>
-  delete(mealId: string, userId: string): Promise<void>
+  delete(mealId: string): Promise<void>
   save(data: Meal): Promise<Meal>
   countByUserId(userId: string): Promise<number>
   countDietsByUserId(userId: string): Promise<number>

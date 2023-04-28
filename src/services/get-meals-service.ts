@@ -24,7 +24,6 @@ export class GetMealsService {
     )
 
     if (!meal) {
-      console.log('caiu aqui')
       throw new ResourceNotFoundError()
     }
 
