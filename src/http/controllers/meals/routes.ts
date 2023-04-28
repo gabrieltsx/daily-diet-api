@@ -3,6 +3,7 @@ import { verifyCookie } from '../middlewares/verify-cookie'
 import { count } from './count'
 import { countDiet } from './count-diets'
 import { countDietsByCreatedAt } from './count-diets-by-created-at'
+import { countNotDiet } from './count-not-diets'
 import { create } from './create'
 import { del } from './delete'
 import { fetch } from './fetch'
@@ -19,5 +20,6 @@ export async function mealsRoutes(app: FastifyInstance) {
   app.put('/meal/:mealId', update)
   app.get('/meal/count', count)
   app.get('/meal/count-diet', countDiet)
+  app.get('/meal/count-not-diet', countNotDiet)
   app.get('/meal/count-diet/group', countDietsByCreatedAt)
 }

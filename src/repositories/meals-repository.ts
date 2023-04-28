@@ -8,7 +8,8 @@ export interface MealsRepository {
   delete(mealId: string, userId: string): Promise<void>
   save(data: Meal): Promise<Meal>
   countByUserId(userId: string): Promise<number>
-  countByUserIdAndDiet(userId: string, diet: boolean): Promise<number>
+  countDietsByUserId(userId: string): Promise<number>
+  countNotDietsByUserId(userId: string): Promise<number>
   countIsDietByUserIdAndGroupByCreatedAt(
     userId: string,
   ): Promise<CoutDietGroupDateResponse[]>

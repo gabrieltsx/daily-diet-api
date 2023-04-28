@@ -28,10 +28,10 @@ describe('Count Meals Service', () => {
       created_at: new Date(),
     })
 
-    const { countMeals } = await sut.handle({
+    const { meals } = await sut.handle({
       userId: 'user-1',
     })
 
-    expect(countMeals).toEqual(2)
+    expect(meals).toEqual(2)
   })
 })

@@ -8,9 +8,9 @@ export async function count(request: FastifyRequest, reply: FastifyReply) {
   const prismaMealsRepository = new PrismaMealsRepository()
   const countMealService = new CountMealsService(prismaMealsRepository)
 
-  const { countMeals } = await countMealService.handle({
+  const { meals } = await countMealService.handle({
     userId: userId ?? '',
   })
 
-  return reply.status(200).send(countMeals)
+  return reply.status(200).send({ meals })
 }

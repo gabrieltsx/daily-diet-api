@@ -2,11 +2,10 @@ import { MealsRepository } from '@/repositories/meals-repository'
 
 interface CountMealsDietServiceRequest {
   userId: string
-  isDiet: boolean
 }
 
 interface CountMealsDietServiceResponse {
-  countMeals: number
+  diets: number
 }
 
 export class CountMealsDietsService {
@@ -14,15 +13,11 @@ export class CountMealsDietsService {
 
   async handle({
     userId,
-    isDiet,
   }: CountMealsDietServiceRequest): Promise<CountMealsDietServiceResponse> {
-    const countMeals = await this.mealsRepository.countByUserIdAndDiet(
-      userId,
-      isDiet,
-    )
+    const diets = await this.mealsRepository.countDietsByUserId(userId)
 
     return {
-      countMeals,
+      diets,
     }
   }
 }

@@ -20,9 +20,17 @@ export class InMemoryMealsRepository implements MealsRepository {
     return countMeals
   }
 
-  async countByUserIdAndDiet(userId: string, diet: boolean) {
+  async countDietsByUserId(userId: string) {
     const countMeals = this.items.filter(
-      (item) => item.user_id === userId && item.is_diet === diet,
+      (item) => item.user_id === userId && item.is_diet === true,
+    ).length
+
+    return countMeals
+  }
+
+  async countNotDietsByUserId(userId: string) {
+    const countMeals = this.items.filter(
+      (item) => item.user_id === userId && item.is_diet === false,
     ).length
 
     return countMeals

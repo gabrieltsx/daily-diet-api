@@ -31,11 +31,22 @@ export class PrismaMealsRepository implements MealsRepository {
     return countMeals
   }
 
-  async countByUserIdAndDiet(userId: string, isDiet: boolean) {
+  async countDietsByUserId(userId: string) {
     const countMeals = prisma.meal.count({
       where: {
         user_id: userId,
-        is_diet: isDiet,
+        is_diet: true,
+      },
+    })
+
+    return countMeals
+  }
+
+  async countNotDietsByUserId(userId: string) {
+    const countMeals = prisma.meal.count({
+      where: {
+        user_id: userId,
+        is_diet: false,
       },
     })
 
