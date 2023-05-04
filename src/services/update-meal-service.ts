@@ -6,6 +6,7 @@ interface MealRequest {
   name: string
   description: string
   isDiet: boolean
+  createdAt: Date
 }
 
 interface UpdateMealServiceRequest {
@@ -38,6 +39,7 @@ export class UpdateMealService {
     meal.name = newMeal.name
     meal.description = newMeal.description
     meal.is_diet = newMeal.isDiet
+    meal.created_at = newMeal.createdAt
 
     await this.mealsRepository.save(meal)
 

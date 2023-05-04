@@ -8,11 +8,13 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const createBodySchema = z.object({
     name: z.string(),
     description: z.string(),
-    // createdAt: z.coerce.date(),
+    createdAt: z.coerce.date(),
     isDiet: z.boolean(),
   })
 
-  const { description, name, isDiet } = createBodySchema.parse(request.body)
+  const { description, name, isDiet, createdAt } = createBodySchema.parse(
+    request.body,
+  )
 
   const { userId } = request.cookies
 
@@ -24,7 +26,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       description,
       name,
       isDiet,
-      createdAt: new Date(),
+      createdAt,
       userId: userId ?? '',
     })
   } catch (err) {

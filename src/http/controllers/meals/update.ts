@@ -14,6 +14,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     description: z.string(),
     isDiet: z.boolean(),
+    createdAt: z.coerce.date(),
   })
 
   const { mealId } = updateParamSchema.parse(request.params)
