@@ -1,15 +1,19 @@
 import { Meal, Prisma } from '@prisma/client'
+import dayjs from 'dayjs'
 import { randomUUID } from 'node:crypto'
 import { MealsRepository } from '../meals-repository'
 import { CoutDietGroupDateResponse } from '../prisma/prisma-meals-repository'
 
 export class InMemoryMealsRepository implements MealsRepository {
   public items: Meal[] = []
+  public itemsGroupByCreatedAt: CoutDietGroupDateResponse[] = []
 
   async countIsDietByUserIdAndGroupByCreatedAt(
     userId: string,
   ): Promise<CoutDietGroupDateResponse[]> {
-    throw new Error('Method not implemented.')
+    const itemsIsDiet = this.items.filter(
+      (item) => item.id === userId && item.is_diet === true,
+    )
   }
 
   async countByUserId(userId: string) {

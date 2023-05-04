@@ -70,12 +70,6 @@ export class PrismaMealsRepository implements MealsRepository {
         id: mealId,
       },
     })
-    // await prisma.meal.deleteMany({
-    //   where: {
-    //     id: mealId,
-    //     user_id: userId,
-    //   },
-    // })
   }
 
   async findManyByUserId(userId: string): Promise<Meal[]> {
